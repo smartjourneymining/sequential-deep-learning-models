@@ -281,7 +281,6 @@ def gpt_predict(model, inp, target, ids, temperature=1.0, top_k=None, sample=Fal
 
             del causal_mask
             del output
-            del input_condition
 
         prediction = (input_condition[0][:, 1:, :], input_condition[1][:, 1:, :]) # Cut the starting [SOS] position
         real_prefix = prefix - 1 # without the [SOS] position
@@ -295,6 +294,7 @@ def gpt_predict(model, inp, target, ids, temperature=1.0, top_k=None, sample=Fal
         # real ids:
         batch_of_traces['ids'][real_prefix] = ids
 
+        del input_condition
         del prediction
 
     return batch_of_traces
