@@ -123,7 +123,7 @@ def iterate_over_prefixes(log_with_prefixes,
                 if subset == 'training':
                     t = np.power(.9, current_epoch)
                     soft_sampled_prediction_categories_for_discriminator = torch.nn.functional.gumbel_softmax(logits=prediction[0].detach(), tau=t, hard=False)
-                    soft_sampled_target_categories_for_discriminator = utils.label_smooth_gumble_sampling(t=torch.nn.functional.one_hot(activities_suffixes_target_batch).float())
+                    soft_sampled_target_categories_for_discriminator = utils.label_smooth_gumbel_sampling(t=torch.nn.functional.one_hot(activities_suffixes_target_batch).float())
                     optimizer_discriminator.zero_grad()
                     prediction_fake = discriminator((soft_sampled_prediction_categories_for_discriminator, prediction[1].detach()))
                     prediction_real = discriminator((soft_sampled_target_categories_for_discriminator, times_suffixes_target_batch))
@@ -209,7 +209,7 @@ def iterate_over_prefixes(log_with_prefixes,
                 if subset == 'training':
                     t = np.power(.9, current_epoch)
                     soft_sampled_prediction_categories_for_discriminator = torch.nn.functional.gumbel_softmax(logits=prediction[0].detach(), tau=t, hard=False)
-                    soft_sampled_target_categories_for_discriminator = utils.label_smooth_gumble_sampling(t=torch.nn.functional.one_hot(a_s_t).float())
+                    soft_sampled_target_categories_for_discriminator = utils.label_smooth_gumbel_sampling(t=torch.nn.functional.one_hot(a_s_t).float())
                     optimizer_discriminator.zero_grad()
                     prediction_fake = discriminator((soft_sampled_prediction_categories_for_discriminator, prediction[1].detach()))
                     prediction_real = discriminator((soft_sampled_target_categories_for_discriminator, t_s_t))
